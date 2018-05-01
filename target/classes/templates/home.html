@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      >
+    <head>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <title>HOME</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href="css/css/custom.css" th:href="@{css/css/custom.css}" rel="stylesheet" />
+
+
+        <script>
+
+            function prev() {
+                var urlParams = new URLSearchParams(window.location.search);
+                newp = urlParams.get('p') - 1;
+                console.log(newp);
+                window.location = "/home?p=" + newp;
+
+            }
+            function next() {
+                var urlParams = new URLSearchParams(window.location.search);
+                var newp = urlParams.get('p')
+                console.log(newp);
+                if (urlParams.get('p') === null){
+                    newp = 1;
+                }
+                
+                newp = parseFloat(newp) + 1;
+                console.log(newp);
+                window.location = "/home?p=" + newp;
+
+            }
+
+        </script>
+    </head>
+    
+    
+    <body>
+            <div th:insert="~{fragments/header :: header}"></div>
+
+        <div lang="en" th:include="fragments/header :: header"></div>
+        <div th:text="${page_error}"></div>
+        <div class="wrapper">
+        <table class="itable">
+            <tr>
+                <th:block th:each="item : ${items1}" >   
+                    <td class="book">
+                        <a th:href="@{/product?id=} + ${item.itemId}">
+                            <div>
+                        <div th:text="${item.name}">...</div>
+                        <img th:src="${item.thumbnailImage}"/>
+                        <div th:text="'$' + ${item.salePrice}" class="price">...</div>
+                            </div>
+                        </a>
+                    </td>
+                </th:block>
+            </tr>
+
+            <tr>
+                <th:block th:each="item : ${items2}" >   
+                    <td class="book">
+                        <a th:href="@{/product?id=} + ${item.itemId}">
+                            <div>
+                        <div th:text="${item.name}">...</div>
+                        <img th:src="${item.thumbnailImage}"/>
+                        <div th:text="'$' + ${item.salePrice}" class="price">...</div>
+                            </div>
+                        </a>
+                    </td>
+                </th:block> 
+            </tr>
+            <tr>
+                <th:block th:each="item : ${items3}" >   
+                    <td class="book">
+                        <a th:href="@{/product?id=} + ${item.itemId}">
+                            <div>
+                        <div th:text="${item.name}">...</div>
+                        <img th:src="${item.thumbnailImage}"/>
+                        <div th:text="'$' + ${item.salePrice}" class="price">...</div>
+                            </div>
+                        </a> 
+                    </td>
+                </th:block> 
+            </tr>
+            <tr>
+                <th:block th:each="item : ${items4}" >   
+                    <td class="book">
+                        <a th:href="@{/product?id=} + ${item.itemId}">
+                            <div>
+                        <div th:text="${item.name}">...</div>
+                        <img th:src="${item.thumbnailImage}"/>
+                        <div th:text="'$' + ${item.salePrice}" class="price">...</div>
+                            </div>
+                        </a>
+                    </td>
+                </th:block> 
+            </tr>    
+            <tr>
+                <th:block th:each="item : ${items5}" >  
+                    <td class="book">
+                        <a th:href="@{/product?id=} + ${item.itemId}">
+                            <div>
+                        <div th:text="${item.name}">...</div>
+                        <img th:src="${item.thumbnailImage}"/>
+                        <div th:text="'$' + ${item.salePrice}" class="price">...</div>
+                            </div>
+                        </a>
+
+                    </td>
+
+                </th:block> 
+            </tr>              
+        </table>
+
+            <p>    
+            <td th:if="${(param.p != null) and (param.p != '1')}">
+                <button onclick="prev()">BACK</button>
+            </td>
+            <td>
+                <button onclick="next()">NEXT</button></td>
+        </p>
+</div>
+        <div lang="en" th:include="fragments/footer :: footer"></div>
+
+    </body>
+</html>

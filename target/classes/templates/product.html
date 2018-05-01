@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <link href="css/css/custom.css" th:href="@{css/css/custom.css}" rel="stylesheet" />
+        <title>PRODUCT</title>
+        <meta charset="UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    </head>
+    <body>
+        
+      
+        <div lang="en" th:include="fragments/header :: header"></div>
+        
+               <div class="wrapper">
+        <div class="grid-container">
+
+            <div>   <h1 th:text="${item.name}"></h1>
+                <div th:if="${item.customerRatingImage}!= null">
+                <img th:src="${item.customerRatingImage}"></img></div>
+            </div>
+            
+            <div></div>
+            <div><img th:src="${item.largeImage}"></img></div>
+            <div class="pricebox"> 
+                
+                <div th:text="'$' + ${item.salePrice}" class="saleprice"></div>
+                <div th:if="${item.msrp ne null and item.msrp ne item.salePrice}"
+                     th:text="'List $' + ${item.msrp} + '  Save $' + ${#numbers.formatDecimal(item.msrp - item.salePrice, 0, 2)}" class="othrprice"></div>
+                     
+            </div>
+            <div>
+                <h2 th:text="'about this item'"></h2>
+                <div th:utext="${item.longDescription}"></div>
+
+            </div>
+            <div></div>
+
+        </div>
+        <h1>Customer Reviews</h1>
+        <div><div th:if="${item.customerRatingImage}== null"> No reviews found for product
+               </div>
+        <img th:src="${item.customerRatingImage}" width="140"></img>
+        </div>
+        <div th:if="${item.customerRatingImage}!= null" th:text="${item.customerRating} + ' out of 5 stars'" class='overall'></div>
+        
+        <th:block th:each="r : ${reviews}" >   
+            <h2 th:text="${r.title}"></h2>
+            <div th:text="'by ' + ${r.reviewer}" class='reviewer'></div>
+            <div th:text="'Review rating:' + ${r.overallRating.rating}"></div>
+            <div th:text="${r.reviewText}"></div>
+            <br></br>
+        </th:block>
+
+</div>
+        <div lang="en" th:include="fragments/footer :: footer"></div>
+               
+    </body>
+</html>
