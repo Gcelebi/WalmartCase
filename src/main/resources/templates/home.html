@@ -46,9 +46,6 @@ and open the template in the editor.
     
     
     <body>
-            <div th:insert="~{fragments/header :: header}"></div>
-
-        <div lang="en" th:include="fragments/header :: header"></div>
         <div th:text="${page_error}"></div>
         <div class="wrapper">
         <table class="itable">
@@ -130,7 +127,6 @@ and open the template in the editor.
                 <button onclick="next()">NEXT</button></td>
         </p>
 </div>
-        <div lang="en" th:include="fragments/footer :: footer"></div>
 
     </body>
 </html>
